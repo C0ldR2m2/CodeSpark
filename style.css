@@ -4,9 +4,10 @@
   --primary-dark:#5b21b6;--accent:#22c55e;--line:#e5e7eb;--dark:#111827;
 }
 *{box-sizing:border-box}
+img{max-width:100%;height:auto}
 body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--text);background:var(--bg);line-height:1.6}
 a{color:inherit}
-.container{width:1180px;margin:0 auto}
+.container{width:min(1180px,100% - 32px);margin:0 auto}
 .site-header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
 .header-inner{height:82px;display:flex;align-items:center;justify-content:space-between}
 .logo img{width:180px;display:block}
@@ -16,11 +17,11 @@ a{color:inherit}
 .btn{display:inline-block;padding:14px 22px;border-radius:12px;text-decoration:none;font-weight:700;background:var(--primary);color:#fff;border:0}
 .btn-secondary{background:#fff;color:var(--primary);border:2px solid var(--primary)}
 .hero{padding:72px 0}
-.hero-grid{display:grid;grid-template-columns:560px 560px;gap:60px;align-items:center}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
 .hero h1{font-size:58px;line-height:1.08;margin:0 0 22px}
 .hero p{font-size:20px;color:var(--muted);margin:0 0 28px}
 .hero-actions{display:flex;gap:16px}
-.hero-image{width:560px;border-radius:28px;box-shadow:0 20px 50px rgba(17,24,39,.14)}
+.hero-image{width:100%;border-radius:28px;box-shadow:0 20px 50px rgba(17,24,39,.14)}
 .section{padding:72px 0}.section.alt{background:#fff}
 .section-title{font-size:38px;margin:0 0 12px}.section-lead{max-width:760px;color:var(--muted);margin:0 0 36px;font-size:18px}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
@@ -29,7 +30,7 @@ a{color:inherit}
 .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:#ede9fe;color:var(--primary-dark);font-size:14px;font-weight:700}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 .stat{background:var(--dark);color:#fff;padding:26px;border-radius:16px;text-align:center}.stat strong{display:block;font-size:34px}
-.course-layout,.about-layout,.contact-layout{display:grid;grid-template-columns:760px 380px;gap:40px;align-items:start}
+.course-layout,.about-layout,.contact-layout{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:40px;align-items:start}
 .course-list{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
 .sidebar{position:sticky;top:110px}
 .schedule{width:100%;border-collapse:collapse;min-width:900px;background:#fff}
@@ -47,5 +48,63 @@ textarea{min-height:120px;resize:vertical}
 .footer{background:var(--dark);color:#fff;padding:42px 0;margin-top:40px}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px}.footer a{color:#d8b4fe}
 
-/* МОБИЛЬНЫЕ СТИЛИ НАМЕРЕННО ОТСУТСТВУЮТ.
-   Проект предназначен для практической по адаптивной верстке. */
+
+
+/* ===== Бургер-меню и обёртка таблицы (базовые стили) ===== */
+.nav-toggle,.nav-cta{display:none}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+/* ===== Планшеты ===== */
+@media (max-width:1024px){
+  .hero-grid{gap:32px}
+  .hero h1{font-size:44px}
+  .cards,.team-grid{grid-template-columns:repeat(2,1fr)}
+  .course-layout,.about-layout,.contact-layout{grid-template-columns:1fr}
+  .sidebar{position:static}
+  .main-nav ul{gap:20px}
+}
+
+/* ===== Телефоны ===== */
+@media (max-width:768px){
+  .header-inner{height:70px;position:relative}
+  .logo img{width:140px}
+  .header-btn{display:none}
+  .nav-toggle{display:flex;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:10px;background:#fff;border:1px solid var(--line);border-radius:10px;cursor:pointer}
+  .nav-toggle span{display:block;height:3px;background:var(--text);border-radius:2px}
+  .main-nav{display:none;position:absolute;top:100%;left:-16px;right:-16px;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 12px 24px rgba(17,24,39,.08);padding:8px 16px 16px}
+  .main-nav.open{display:block}
+  .main-nav ul{flex-direction:column;align-items:stretch;gap:0}
+  .main-nav li a:not(.btn){display:block;padding:14px 4px;border-bottom:1px solid var(--line)}
+  .nav-cta{display:block;margin-top:14px}
+  .nav-cta .btn{display:block;text-align:center}
+
+  .hero{padding:36px 0}
+  .hero-grid{grid-template-columns:1fr}
+  .hero h1{font-size:34px}
+  .hero p{font-size:17px}
+  .hero-actions{flex-wrap:wrap}
+  .hero-actions .btn{flex:1 1 100%;text-align:center}
+  .section{padding:44px 0}
+  .section-title{font-size:28px}
+  .section-lead{font-size:16px}
+  .page-hero{padding:36px 0 26px}
+  .page-hero h1{font-size:32px}
+  .cards,.team-grid,.course-list{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat{padding:18px}
+  .stat strong{font-size:28px}
+  .feature-row{flex-direction:column;gap:16px}
+  .feature{width:100%}
+  .form-row{flex-direction:column;gap:0}
+  input,select,textarea{font-size:16px}
+  .form-card .btn{width:100%}
+  .teacher-avatar{height:180px}
+  .footer-grid{grid-template-columns:1fr;gap:24px}
+}
+
+/* ===== Маленькие телефоны ===== */
+@media (max-width:380px){
+  .hero h1{font-size:28px}
+  .stats{grid-template-columns:1fr}
+  .card,.course-card,.teacher,.form-card,.sidebar,.feature{padding:18px}
+}
